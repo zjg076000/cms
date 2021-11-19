@@ -1,0 +1,71 @@
+部署説明：
+
+
+
+環境
+
+
+mysql ：  
+root   ：rootabc@%bl.com
+
+
+
+1. 安装jdk
+
+   tar -xzvf  jdk-11_linux-x64_bin.tar.gz  -C  /usr/local/
+
+ mv /usr/local/jdk-11  /usr/local/java
+
+
+[root@localhost  src]# vi /etc/profile  
+(在這檔最後面添加)
+JAVA_HOME=/usr/local/java
+PATH=$JAVA_HOME/bin:$PATH
+CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+export JAVA_HOME
+export PATH
+export CLASSPATH
+
+生效
+source /etc/profile
+
+
+测试  
+java  -version
+
+
+
+
+
+安装 redis  5.0.7
+
+dnf -y group install "Development Tools"  
+或者
+dnf -y install gcc-c++ gcc make
+
+https://www.cnblogs.com/hunanzp/p/12304622.html
+
+wget http://download.redis.io/releases/redis-6.0.8.tar.gz
+# tar -zvxf redis-5.0.7.tar.gz   -C /data/
+# cd /data/redis-5.0.7/
+#make
+#make PREFIX=/data/redis-5.0.7  install
+
+# cd /data/redis-5.0.7/src
+
+#./redis-server  /data/redis-5.0.7/redis.conf
+
+cd /data/service/cms-admin
+sudo sh start.sh
+
+cd /data/service/nginx-gateway/
+sudo sh nginx.sh start
+
+
+
+
+cd
+
+安装 8.0.13 mysql
+
+https://www.jianshu.com/p/add2be209788
