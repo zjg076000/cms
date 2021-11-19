@@ -1,6 +1,42 @@
 部署説明：
 
 
+一、问题01：
+
+./sbin/nginx: /lib64/libcrypto.so.10: no version information available (required by ./sbin/nginx)
+./sbin/nginx: /lib64/libcrypto.so.10: no version information available (required by ./sbin/nginx)
+./sbin/nginx: /lib64/libssl.so.10: no version information available (required by ./sbin/nginx)
+
+CENTOS 8重启nginx这样报错
+
+解决方法：安装openssl 10
+
+dnf install compat-openssl10
+
+
+二、问题02
+
+https://www.itread01.com/content/1546810773.html （解决方案网址）
+
+Please check the Redis logs for details about the RDB error.这个报错
+
+原因：強制把redis快照關閉了導致不能持久化的問題。
+
+解決方法：
+
+方法1、在連線了命令列輸入：
+
+redis-cli
+再輸入這句就可以解決：
+
+config set stop-writes-on-bgsave-error no
+方法2、修改redis.conf檔案：
+
+vim開啟redis-server配置的redis.conf檔案，然後使用快捷匹配模式：/stop-writes-on-bgsave-error定位到stop-writes-on-bgsave-error字串所在位置，接著把後面的yes設定為no即可。
+
+
+
+
 
 環境
 
@@ -62,10 +98,22 @@ cd /data/service/nginx-gateway/
 sudo sh nginx.sh start
 
 
-
-
 cd
 
 安装 8.0.13 mysql
 
 https://www.jianshu.com/p/add2be209788
+
+
+
+
+
+
+
+
+
+
+
+
+
+
